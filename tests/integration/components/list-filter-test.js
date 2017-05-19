@@ -15,9 +15,9 @@ test('should initially load all listings', function (assert) {
     //since they are potentially fetching data asynchronously
     this.on('filterByCity', (val) => {
         if (val === '') {
-            return RSVP.resolve(ITEMS); //returns all cities
+            return RSVP.resolve(ITEMS);
         } else {
-            return RSVP.resolve(FILTERED_ITEMS); //returns one city
+            return RSVP.resolve(FILTERED_ITEMS);
         }
     });
 
@@ -26,21 +26,21 @@ test('should initially load all listings', function (assert) {
     // will use it.
     this.render(hbs`
         {{#list-filter filter=(action 'filterByCity') as |results|}}
-        <ul>
-        {{#each results as |item|}}
-        <li class="city">
-        {{item.city}}
-        </li>
-        {{/each}}
-        </ul>
+            <ul>
+                {{#each results as |item|}}
+                    <li class="city">
+                        {{item.city}}
+                    </li>
+                {{/each}}
+            </ul>
         {{/list-filter}}
-        `);
+    `);
 
     // The keyup event here should invoke an action that will cause the list to be filtered
     this.$('.list-filter input').val('San').keyup();
 
     return wait().then(() => {
-        assert.equal(this.$('.city').length, 3);
+        assert.equal(this.$('.city').length, 1);
         assert.equal(this.$('.city').first().text().trim(), 'San Francisco');
     });
 });

@@ -1,7 +1,3 @@
-// export default function googleMaps() {
-//   return true;
-// }
-
 import Ember from 'ember';
 
 const google = window.google;
